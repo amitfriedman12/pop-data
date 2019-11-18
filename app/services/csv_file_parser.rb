@@ -20,7 +20,7 @@ class CsvFileParser
   end
 
   def csv_file
-    @csv_file ||= fetch_csv.force_encoding('utf-8')
+    @csv_file ||= fetch_csv
   end
 
   def fetch_csv
