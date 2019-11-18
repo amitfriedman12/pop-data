@@ -12,20 +12,24 @@ class CsvFileParser
   end
 
   def call
-    ::CSV.parse(csv_file, headers: true, header_converters: :symbol).map do |row|
-      ::Hashie::Mash.new(row.to_hash)
-    end
+    map_rows(fetch_csv)
+  rescue Encoding::UndefinedConversionError => e
+    map_rows(fetch_csv.force_encoding('utf-8'))
   rescue StandardError => e
     raise "Could not read the CSV file: #{e.message}"
   end
 
-  def csv_file
-    @csv_file ||= fetch_csv
+  def map_rows(csv_file)
+    ::CSV.parse(csv_file, headers: true, header_converters: :symbol).map do |row|
+      ::Hashie::Mash.new(row.to_hash)
+    end
   end
 
   def fetch_csv
-    response = Faraday.get(csv_url)
-    fail unless response.success?
-    response.body
+    @fetch_csv ||= begin
+      response = Faraday.get(csv_url)
+      fail unless response.success?
+      response.body
+    end
   end
 end
