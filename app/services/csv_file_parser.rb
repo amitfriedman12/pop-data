@@ -26,10 +26,12 @@ class CsvFileParser
   end
 
   def fetch_csv
-    @fetch_csv ||= begin
-      response = Faraday.get(csv_url)
-      fail unless response.success?
-      response.body
-    end
+    @fetch_csv ||= response_body
+  end
+
+  def response_body
+    response = Faraday.get(csv_url)
+    fail 'Error Response' unless response.success?
+    response.body
   end
 end
