@@ -33,3 +33,5 @@ To get population data for a given zipcode, make a GET api call to:
 
 https://pop-data.herokuapp.com/zips/:zip
 
+For example: https://pop-data.herokuapp.com/zips/90266
+
