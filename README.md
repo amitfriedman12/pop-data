@@ -11,9 +11,9 @@
 $ bundle exec rake db:create
 ```
 
-* Database initialization
+* Database migrations
 ```
-$ bundle exec rake db:create
+$ bundle exec rake db:migrate
 ```
 
 * Seed DB
@@ -29,5 +29,7 @@ bundle exec rails spec
 ```
 
 * API is hosted on heroku.
-To get population data for a given zipcode, make a GET api call to: https://pop-data.herokuapp.com/zips/:zip
+To get population data for a given zipcode, make a GET api call to:
+
+https://pop-data.herokuapp.com/zips/:zip
 
